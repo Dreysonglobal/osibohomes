@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse our exclusive collection of luxury properties for sale, lease, and rent in Lagos, Nigeria.">
+  <title>Properties | Lofty Crest Homes</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle' fill='%23D4AF37'%3ELCH%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo-area">
+        <img src="images/logo.jpg?v=1" alt="Lofty Crest Homes" class="logo-img" onerror="this.src='https://placehold.co/80x80?text=LCH'">
+        <span class="logo-text">LOFTY CREST <span class="gold">HOMES</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="properties.html" class="active">Properties</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><button id="adminBtn" class="admin-nav-btn"><i class="fas fa-crown"></i> Admin</button></li>
+      </ul>
+      <div class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <h1>Our Exclusive <span class="gold">Collection</span></h1>
+    <p>Discover Lagos's most prestigious properties</p>
+  </section>
+
+  <section class="property-filters">
+    <div class="container">
+      <select id="statusFilter">
+        <option value="all">All Properties</option>
+        <option value="sale">For Sale</option>
+        <option value="lease">For Lease</option>
+        <option value="rent">For Rent</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="properties-section">
+    <div class="container">
+      <div class="property-grid" id="allPropertiesGrid">
+        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading properties...</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content gold-black-modal">
+      <span class="close-modal">&times;</span>
+      <h2><i class="fas fa-lock"></i> Admin Access</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Admin Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit" class="gold-btn">Login <i class="fas fa-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <div id="propertyGalleryModal" class="gallery-modal" onclick="if(event.target===this) closePropertyGallery()">
+    <div class="gallery-content">
+      <button class="gallery-close" onclick="closePropertyGallery()">&times;</button>
+      <div class="gallery-left">
+        <img id="galleryMainImage" src="" alt="Property image">
+        <div class="gallery-actions">
+          <button type="button" onclick="prevGalleryImage()">Prev</button>
+          <span id="galleryCounter">0 / 0</span>
+          <button type="button" onclick="nextGalleryImage()">Next</button>
+        </div>
+        <div id="galleryThumbnails" class="gallery-thumbs"></div>
+      </div>
+      <div class="gallery-right">
+        <h2 id="galleryPropertyTitle"></h2>
+        <p class="gallery-detail" id="galleryPropertyLocation"></p>
+        <p class="gallery-detail" id="galleryPropertyPrice"></p>
+        <p class="gallery-detail" id="galleryPropertyStatus"></p>
+        <p class="gallery-description" id="galleryPropertyDescription"></p>
+        <button class="contact-btn" onclick="contactViaWhatsApp(window.currentGalleryPropertyId)">Contact Us</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Lofty Crest Homes. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Lofty Crest Homes</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .dashboard-container { max-width: 1400px; margin: 100px auto 50px; padding: 0 5%; }
+    .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+    .add-property-btn { background: linear-gradient(135deg, #D4AF37, #B8960C); color: #000; padding: 12px 24px; border: none; border-radius: 40px; font-weight: bold; cursor: pointer; }
+    .property-form-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; overflow-y: auto; }
+    .property-form { background: #111; max-width: 600px; width: 90%; padding: 30px; border-radius: 20px; border: 1px solid #D4AF37; margin: 20px auto; }
+    .property-form input, .property-form textarea, .property-form select { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #333; color: white; border-radius: 8px; }
+    .property-form button { background: #D4AF37; color: #000; padding: 12px; border: none; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 10px; }
+    .admin-property-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+    .admin-property-card { background: #111; border: 1px solid #222; border-radius: 15px; overflow: hidden; }
+    .admin-property-card img { width: 100%; height: 200px; object-fit: cover; }
+    .admin-property-info { padding: 20px; }
+    .admin-actions { display: flex; gap: 10px; margin-top: 15px; }
+    .edit-btn, .delete-btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; }
+    .edit-btn { background: #D4AF37; color: #000; }
+    .delete-btn { background: #8B0000; color: white; }
+    .logout-btn { background: #333; color: #D4AF37; padding: 10px 20px; border: 1px solid #D4AF37; border-radius: 30px; cursor: pointer; }
+    .image-upload-section { margin: 15px 0; }
+    .image-upload-area { border: 2px dashed #D4AF37; padding: 20px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s; background: rgba(212,175,55,0.05); }
+    .image-upload-area:hover { background: rgba(212,175,55,0.15); }
+    .image-upload-area input[type="file"] { display: none; }
+    .upload-text { color: #D4AF37; font-weight: bold; margin-bottom: 10px; }
+    .image-preview-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-top: 15px; }
+    .image-count-info { color: #D4AF37; margin-top: 10px; font-size: 0.95rem; text-align: center; }
+    .image-preview { position: relative; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
+    .image-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .image-preview .remove-img { position: absolute; top: 0; right: 0; background: #8B0000; color: white; border: none; cursor: pointer; padding: 2px 6px; font-size: 12px; }
+    #propertyImage { display: none; }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1><i class="fas fa-crown gold"></i> Admin Dashboard</h1>
+      <div><button class="add-property-btn" id="showAddFormBtn"><i class="fas fa-plus"></i> Add Property</button>
+      <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button></div>
+    </div>
+    <div class="admin-property-grid" id="adminPropertyGrid"></div>
+  </div>
+
+  <div id="propertyFormModal" class="property-form-modal">
+    <div class="property-form">
+      <h2 id="formTitle">Add New Property</h2>
+      <form id="propertyForm">
+        <input type="text" id="propertyTitle" placeholder="Property Title" required>
+        <input type="text" id="propertyLocation" placeholder="Location (e.g., Oniru, Lagos)" required>
+        <input type="text" id="propertyPrice" placeholder="Price (e.g., ₦250,000,000 or ₦5,000,000/year)" required>
+        <select id="propertyStatus" required>
+          <option value="sale">For Sale</option>
+          <option value="lease">For Lease</option>
+          <option value="rent">For Rent</option>
+        </select>
+        <div class="image-upload-section">
+          <div class="image-upload-area" id="uploadArea">
+            <div class="upload-text"><i class="fas fa-cloud-upload-alt"></i> Click to upload images (Max 5)</div>
+            <small>Select images from your device</small>
+            <input type="file" id="propertyImage" accept="image/*" multiple>
+          </div>
+          <div id="imageCountInfo" class="image-count-info">0 / 5 images selected</div>
+          <div class="image-preview-container" id="imagePreviewContainer"></div>
+        </div>
+        <textarea id="propertyDescription" rows="3" placeholder="Property description, features..." required></textarea>
+        <button type="submit">Save Property</button>
+        <button type="button" id="closeFormBtn" style="background:#333; margin-top:5px;">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lofty Crest Homes - Luxury real estate in Lagos, Nigeria. Over 10 years of experience offering premium properties for sale, lease, and rent in Oniru, Lekki, Victoria Island.">
+  <meta name="keywords" content="Luxury real estate Lagos, properties for sale Lekki, Oniru real estate, Lofty Crest Homes, Nigeria luxury homes, property for lease Lagos">
+  <meta name="author" content="Lofty Crest Homes">
+  <meta property="og:title" content="Lofty Crest Homes - Premier Luxury Real Estate in Lagos">
+  <meta property="og:description" content="Discover exquisite properties in Nigeria's most sought-after locations. Your dream home awaits.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://loftycresthomes.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://loftycresthomes.com">
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle' fill='%23D4AF37'%3ELCH%3C/text%3E%3C/svg%3E">
+  <title>Lofty Crest Homes | Luxury Real Estate Lagos Nigeria</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo-area">
+        <img src="images/logo.jpg?v=1" alt="Lofty Crest Homes" class="logo-img" onerror="this.src='https://placehold.co/80x80?text=LCH'">
+        <span class="logo-text">LOFTY CREST <span class="gold">HOMES</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="properties.html">Properties</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><button id="adminBtn" class="admin-nav-btn"><i class="fas fa-crown"></i> Admin</button></li>
+      </ul>
+      <div class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-slider">
+      <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600')"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600')"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600')"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9343f6d?w=1600')"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600')"></div>
+    </div>
+    <div class="hero-overlay">
+      <h1>Where Luxury Meets Legacy</h1>
+      <p>Discover exquisite homes in Lagos' finest addresses</p>
+      <a href="properties.html" class="hero-btn">Explore Properties <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <section class="featured-section">
+    <div class="container">
+      <h2 class="section-title">Featured <span class="gold">Properties</span></h2>
+      <div class="property-grid" id="homePropertyGrid">
+        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading luxury estates...</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item"><i class="fas fa-home"></i><h3>200+</h3><p>Luxury Properties</p></div>
+        <div class="stat-item"><i class="fas fa-smile"></i><h3>500+</h3><p>Happy Clients</p></div>
+        <div class="stat-item"><i class="fas fa-calendar-check"></i><h3>10+</h3><p>Years Experience</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-bar">
+    <div class="container">
+      <p><i class="fas fa-map-marker-alt gold"></i> Head Office: Oba Idowu Abiodun Street, Oniru, Lagos, Nigeria</p>
+      <p><i class="fas fa-phone-alt gold"></i> +234 802 345 6789 | <i class="fas fa-envelope gold"></i> hello@loftycresthomes.com</p>
+    </div>
+  </section>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content gold-black-modal">
+      <span class="close-modal">&times;</span>
+      <h2><i class="fas fa-lock"></i> Admin Access</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Admin Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit" class="gold-btn">Login <i class="fas fa-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <div id="propertyGalleryModal" class="gallery-modal" onclick="if(event.target===this) closePropertyGallery()">
+    <div class="gallery-content">
+      <button class="gallery-close" onclick="closePropertyGallery()">&times;</button>
+      <div class="gallery-left">
+        <img id="galleryMainImage" src="" alt="Property image">
+        <div class="gallery-actions">
+          <button type="button" onclick="prevGalleryImage()">Prev</button>
+          <span id="galleryCounter">0 / 0</span>
+          <button type="button" onclick="nextGalleryImage()">Next</button>
+        </div>
+        <div id="galleryThumbnails" class="gallery-thumbs"></div>
+      </div>
+      <div class="gallery-right">
+        <h2 id="galleryPropertyTitle"></h2>
+        <p class="gallery-detail" id="galleryPropertyLocation"></p>
+        <p class="gallery-detail" id="galleryPropertyPrice"></p>
+        <p class="gallery-detail" id="galleryPropertyStatus"></p>
+        <p class="gallery-description" id="galleryPropertyDescription"></p>
+        <button class="contact-btn" onclick="contactViaWhatsApp(window.currentGalleryPropertyId)">Contact Us</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Lofty Crest Homes. All Rights Reserved. Premier Luxury Real Estate in Lagos.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
