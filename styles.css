@@ -626,6 +626,9 @@ footer { text-align: center; padding: 30px; background: #000; border-top: 1px so
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
   }
+  .price {
+    font-size: 1.2rem;
+  }
   .whatsapp-float {
     width: 54px;
     height: 54px;
