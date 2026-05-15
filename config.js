@@ -1,6 +1,6 @@
 // Supabase Configuration (shared across all pages)
-const supabaseUrl = 'https://vxtuidediqvspyfhijfl.supabase.co';
-const supabaseKey = 'sb_publishable_nBS_1O-8VCkga-iiovwjow__cRbRRUa';
+const supabaseUrl = 'https://vxmzdxavjxvzcornyebd.supabase.co';
+const supabaseKey = 'sb_publishable_3hSxhFhuilReZweJigvLJg_A6jQegbd';
 
 // Create supabase client and expose it globally
 function initSupabase() {

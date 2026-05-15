@@ -238,7 +238,7 @@ function contactViaWhatsApp(id) {
   const propertyType = extractPropertyTypeFromDescription(property);
   const cleanDesc = getCleanDescription(property.description);
   const message = encodeURIComponent(`Hi, I’m interested in this property:\nTitle: ${property.title}\nLocation: ${property.location}\nPrice: ${property.price}\nType: ${propertyType}\nDescription: ${cleanDesc}`);
-  const url = `https://wa.me/2347034293609?text=${message}`;
+  const url = `https://wa.me/2349064527894?text=${message}`;
   const newWindow = window.open(url, '_blank');
   if (!newWindow) {
     window.location.href = url;

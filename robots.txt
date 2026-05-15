@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://loftycresthomes.com/sitemap.xml
+Sitemap: https://dreysonglobal.github.io/osibohomes/sitemap.xml
